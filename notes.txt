@@ -1,0 +1,18 @@
+LCBO API KEY
+MDo1ZmIzNzRmMi1hYTE5LTExZTgtYTE2MC0wZjM0NTY4NzM0NTQ6MTFZV3NQZmhheWdxeGQ2WDVHazdoM1p0ZEFyUzlyV1RVcUg1
+
+
+example
+jQuery.ajax({
+  url: 'https://lcboapi.com/stores',
+  headers: { 'Authorization': 'Token ACCESS_KEY' }
+}).then(function(data) {
+  console.log(data);
+});
+
+
+
+
+based on wine results, plot geolocation and nearby lcbo using Google Maps and Google Places
+
+- see location bias
