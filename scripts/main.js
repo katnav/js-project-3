@@ -42,7 +42,7 @@ wineApp.displayWines = (lcboWines) => {
             name: 'options',
             value: wine.id
         })
-		const name = $('<h2>').text(wine.name);
+		const name = $('<p>').addClass('name').text(wine.name);
 		const wineID = $('<p>').text(wine.id); //not displayed
 		const origin = $('<p>').text(wine.origin);
 		const style = $('<p>').text(wine.style);
@@ -213,6 +213,24 @@ $(function() {
 	// code to run when the doc is ready
 	//console.log('doc ready ✨');
 	wineApp.init();
+
+  $('#wineType').on('change', (event) => {
+  $('html, body').animate({
+    scrollTop: $("div.wine-list").offset().top
+  }, 1500)
+})
+  // $('div.middle').click(function (){
+  //   $('html, body').animate({
+  //     scrollTop: $("div.bottom").offset().top
+  //   }, 1000)
+  // }),
+  // $('div.bottom').click(function (){
+  //   $('html, body').animate({
+  //     scrollTop: $("div.top").offset().top
+  //   }, 1000)
+  // })
+
+
 
 
 })
