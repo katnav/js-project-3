@@ -8,14 +8,33 @@ body {
   font-family: "Avenir", sans-serif;
   font-size: 16px;
   font-color: #fff;
-  background-image: url("../images/barnwood.jpg");
-  background-attachment: fixed; }
+  background-image: url("../images/pouring-wine-bw.jpg");
+  background-attachment: fixed;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
 
-header {
-  text-align: center; }
+.title {
+  font-size: 100px;
+  text-align: center;
+  color: #fff; }
+
+p.title {
+  margin-bottom: 0;
+  -webkit-margin-after: 0; }
+
+p.tagline {
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 60px;
+  margin-bottom: 60px; }
 
 h1, h2 {
-  color: #fff; }
+  color: #fff;
+  font-weight: normal; }
 
 .text-center {
   text-align: center; }
@@ -23,7 +42,7 @@ h1, h2 {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 50px;
+  padding: 0 50px;
   overflow: hidden;
   /*clearfix*/ }
 
@@ -79,6 +98,12 @@ select {
   line-height: 1.1em;
   -webkit-margin-before: .5em;
   -webkit-margin-after: .5em; }
+
+#wine-display p.name {
+  line-height: 1.2em;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 30px 0 0; }
 
 #wine-container input {
   display: none; }
