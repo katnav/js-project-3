@@ -83,9 +83,9 @@ wineApp.displayWines = (lcboWines) => {
 
 
 //stores?lat=43.65838&lon=-79.44335&product_id=438457
-	//const wineApp = {};
+	const mapApp = {};
 
-    wineApp.loadMap = function(lat, lng) {
+    mapApp.loadMap = function(lat, lng) {
 
       const mapDiv = $('.map')[0] //select first div - class map
 
@@ -94,17 +94,17 @@ wineApp.displayWines = (lcboWines) => {
         zoom: 10
               };
 
-      wineApp.map = new google.maps.Map(mapDiv, mapOptions);
+      mapApp.map = new google.maps.Map(mapDiv, mapOptions);
 
-    } // end wineApp.loadMap definition
+    } // end mapApp.loadMap definition
 
 
-	wineApp.loadMarkers = function(lat, lng) {
+	mapApp.loadMarkers = function(lat, lng) {
 
       const currentPosition = new google.maps.Marker({
         position: {lat: lat, lng: lng},
         icon: 'https://maps.google.com/mapfiles/kml/shapes/schools_maps.png',
-        map: wineApp.map
+        map: mapApp.map
       })
 
       //display info when marker is clicked
@@ -112,7 +112,7 @@ wineApp.displayWines = (lcboWines) => {
 
       google.maps.event.addListener(currentPosition, 'click', () => {
        infoWindow.setContent('You are here');
-       infoWindow.open(wineApp.map, currentPosition);
+       infoWindow.open(mapApp.map, currentPosition);
 
 //places api key AIzaSyASpkSOoUNQjSnFOyAcqncw7_jZMaXh7Wc
 
@@ -121,29 +121,28 @@ wineApp.displayWines = (lcboWines) => {
 
     }; //end loadMarkers
 
-	wineApp.getUserLocation = function() {
+	mapApp.getUserLocation = function() {
 
   navigator.geolocation.getCurrentPosition(function(position) {
 
     console.log(position);
-    wineApp.loadMap(position.coords.latitude, position.coords.longitude);
-    wineApp.loadMarkers(position.coords.latitude, position.coords.longitude)
+    mapApp.loadMap(position.coords.latitude, position.coords.longitude);
+    mapApp.loadMarkers(position.coords.latitude, position.coords.longitude)
 
   })
 }//end user location
 
 //get stores by ID
 
-wineApp.getStoresById = function(clickedItem, lat, lng){
+mapApp.getStoresById = function(clickedItem, lat, lng){
         console.log(clickedItem);
         // let storeResults = [];
          $.ajax({
             url: "http://lcboapi.com/stores",
-            headers: { 'Authorization': 'Token wineApp.apikey' },
             method: "GET",
             dataType: "jsonp",
             data: {
-                //access_key: wineApp.apikey,
+                access_key: wineApp.apikey,
                 product_id: clickedItem,
                 per_page: 100,
                 page: 1,
@@ -158,32 +157,6 @@ wineApp.getStoresById = function(clickedItem, lat, lng){
 }
 //end store location
 
-wineApp.filteredStore = function(store) {
-    // console.log(wineApp.map.clear);
-    // map.removeOverlay(marker);
-    wineApp.loadMap(wineApp.position);
-    // maybe add button click listener here?
-    store.forEach(function(storeObj) {
-        const pos = {
-            lat: storeObj.latitude,
-            lng: storeObj.longitude
-        }
-        const lcboStore = new google.maps.Marker({
-            position: pos,
-            map: wineApp.map,
-            icon:'images/LCBOMarker.svg',
-        });
-
-        lcboStore.addListener('click', function() {
-            wineApp.map.setZoom(17);
-            wineApp.map.setCenter(lcboStore.getPosition());
-            const userClickedPos = lcboStore.position;
-            console.log (userClickedPos);
-            wineApp.getGoogleDirections(userClickedPos);
-        });
-    });
-} //end filtered stores
-
 //get array of wines when user makes a selection
 wineApp.eventHandler = () => {
   $('#wineType').on('change', (event) => {
@@ -192,7 +165,7 @@ wineApp.eventHandler = () => {
 
   $('#wine-display').on('click', 'input', function(){
         const clickedItem = $(this).val();
-        wineApp.getStoresById(clickedItem, wineApp.lat, wineApp.lng);
+        mapApp.getStoresById(clickedItem, mapApp.lat, mapApp.lng);
 })
 
   };
@@ -200,9 +173,8 @@ wineApp.eventHandler = () => {
 wineApp.init = () => {
 	wineApp.getWines('sweet');
 	wineApp.eventHandler();
-	wineApp.getUserLocation();
-	wineApp.loadMap();
-  wineApp.getStoresById();
+	mapApp.getUserLocation();
+	mapApp.loadMap();
 
 
 }
