@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box; }
+
+.border {
+  border: 1px solid red; }
+
+body {
+  font-family: "Avenir", sans-serif;
+  font-size: 16px;
+  font-color: #fff;
+  background-image: url("../images/barnwood.jpg");
+  background-attachment: fixed; }
+
+header {
+  text-align: center; }
+
+h1, h2 {
+  color: #fff; }
+
+.text-center {
+  text-align: center; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px;
+  overflow: hidden;
+  /*clearfix*/ }
+
+.main form {
+  text-align: center;
+  margin-bottom: 30px; }
+
+#wine-display {
+  display: grid;
+  /*grid-template-columns: 1fr 1fr 1fr 1fr;*/
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 20px;
+  margin-bottom: 30px; }
+
+#wine-display div {
+  background-color: #fff;
+  text-align: center;
+  padding: 0 10px 10px;
+  font-size: 12px; }
+
+#wine-display div:hover {
+  -webkit-box-shadow: 0px 0px 0px 5px #f7ad2d;
+  -moz-box-shadow: 0px 0px 0px 5px #f7ad2d;
+  box-shadow: 0px 0px 0px 5px #f7ad2d;
+  transition: border 0.5s ease; }
+
+.selected-wine {
+  -webkit-box-shadow: 0px 0px 0px 5px #f7ad2d;
+  -moz-box-shadow: 0px 0px 0px 5px #f7ad2d;
+  box-shadow: 0px 0px 0px 5px #f7ad2d; }
+
+select {
+  font-size: 2em;
+  border-radius: 0;
+  height: 60px;
+  width: 400px;
+  margin-bottom: 50px; }
+
+.price {
+  font-size: 1.6em;
+  font-weight: bold; }
+
+#wine-display img {
+  width: 70%;
+  height: auto; }
+
+#wine-display h2 {
+  font-size: 14px;
+  text-align: center; }
+
+#wine-display p {
+  line-height: 1.1em;
+  -webkit-margin-before: .5em;
+  -webkit-margin-after: .5em; }
+
+#wine-container input {
+  display: none; }
+
+#location {
+  background-color: #fff; }
+
+.map {
+  width: 100%;
+  height: 400px; }
+
+/*# sourceMappingURL=style.css.map */
