@@ -7,25 +7,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="style/style.css">
+        <!-- <link rel="stylesheet" href="style/animate.css"> -->
+        <!-- <link rel="stylesheet" href="map-icons-master/dist/css/map-icons.css"> -->
     </head>
     <body>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="scripts/main.js"></script>
+        <!-- <script src="scripts/jquery.smooth-scroll.js"></script> -->
+         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGcj5aiX4UZjNdw-ane2U6hhle1hV0vCw&libraries=places"></script>
+
+  <!-- <script src="map-icons-master/dist/js/map-icons.js"></script> -->
+        <div class="container">
+            <header><h1>What are you in the mood for today?</h1></header>
 <div class="main">
-    <form id="main-meal">
-        <select id="mealQuery" name="mealQuery">
-        <option value="meat">meat</option>
-        <option value="seafood">seafood</option>
-        <option value="lamb">lamb</option>
-        <option value="turkey">turkey</option>
-        <option value="cheese">cheese</option>
-        <option value="cold cuts">cold cuts</option>
+    <form id="wine-choice">
+        <select id="wineType" name="wineType">
+        <option value="sweet">Sweet and Fruity</option>
+        <option value="crisp">Light and Crisp</option>
+        <option value="bold wine">Bold</option>
+        <option value="smooth wine">Smooth</option>
+        <option value="dry wine">Dry</option>
+        <option value="sparkling">Sparkling</option>
+        <option value="dessert wine">Dessert</option>
+        <option value="light wine">Light and Subtle</option>
+        <option value="rose wine">Rose</option>
+
       </select>
+
     </form>
+<h2 class="text-center">Select a wine below</h2>
+
 </div>
-<div class="container" id="wine-display">
+
+
+<form id="wine-display">
+</form>
+
+<div id="location" class="map">
+
+</div>
 
 
 </div>
+
     </body>
 </html>
