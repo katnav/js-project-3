@@ -48,22 +48,22 @@ wineApp.displayWines = (lcboWines) => {
         if (wine.image_thumb_url != null && wine.inventory_count > 0) {
             const label = $('<label>').attr('for', wine.id).append(name, thumb, price, origin, style,
                 servingSuggestion);
-            const wineSuggestion = $('<div id="wine-container">').addClass('wine-container').append(input,
+            const wineSuggestion = $('<div class="wine-tile">').addClass('wine-container').append(input,
                 label)
-            $('#wine-display').append(wineSuggestion);
 
             $('#wine-display').append(wineSuggestion);
-
 
             //add border to selected wine
-            $('#wine-display').on('click', '#wine-container', function() {
+            $('#wine-display').on('click', '.wine-tile', function() {
                 $(this).siblings().removeClass('selected-wine');
                 $(this).addClass('selected-wine');
             });
 
 
-            wineSuggestion.hide();
-            wineSuggestion.fadeIn("slow");
+            // wineSuggestion.hide();
+            // wineSuggestion.fadeIn("slow");
+
+
 
         }
 
@@ -103,7 +103,7 @@ wineApp.loadMarkers = function(lat, lng) {
         map: wineApp.map
     })
 
-    //display info when marker is clicked
+    //display info when current postion marker is clicked
     const infoWindow = new google.maps.InfoWindow()
 
     google.maps.event.addListener(currentPosition, 'click', () => {
@@ -170,24 +170,46 @@ wineApp.filteredStore = function(stores) {
         const storePos = {
             lat: store.latitude,
             lng: store.longitude,
-            name: store
+            name: store,
+            id: store.id
         };
 
+        // const storeId = {
+
+        //     id: store.id
+
+        // };
+
         const lcboStoreMarker = new google.maps.Marker({
+
             position: storePos,
             map: wineApp.map,
             icon: '../api/images/LCBOMarker.png',
         });
 
         console.log(storePos);
+
+        const infoWindowStore = new google.maps.InfoWindow()
+
         lcboStoreMarker.addListener('click', function() {
             wineApp.map.setZoom(10);
             wineApp.map.setCenter(lcboStoreMarker.getPosition());
 
-            //const userClickedPos = lcboStoreMarker.position;
-        });
+
+
+            infoWindowStore.setContent('<div><strong>' + store.name + '</strong><br>' +
+          'Store ID: ' + store.id + '<br>' +
+          store.address_line_1 + '<br>' + store.address_line_2 + '<br>' + store.city + '<br>' + store.telephone + '<br>' +'</div>');
+            infoWindowStore.open(wineApp.map, this);
+        }); //end listener
+
+
+
 
     }); //end forEach
+
+
+
 
             // Removes the markers from the map, but keeps them in the array.
       function clearMarkers() {
@@ -216,6 +238,10 @@ wineApp.eventHandler = () => {
         console.log(clickedItem, wineApp.usrLat, wineApp.usrLng);
 
          $('#location').removeClass('hide-map').addClass('show-map');
+
+        $('html, body').animate({ scrollTop: $(document).height() }, "slow");
+
+
 
     });
 
@@ -246,10 +272,7 @@ $(function() {
         }, 1500)
     })
 
-    $('#gotobottom').click(function (){
-      $('html, body').animate({ scrollTop: $(document).height() }, "slow");
 
-});
 
 
 
