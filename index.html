@@ -6,28 +6,22 @@
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="style/style.css">
-        <!-- <link rel="stylesheet" href="style/animate.css"> -->
-        <!-- <link rel="stylesheet" href="map-icons-master/dist/css/map-icons.css"> -->
+        <link rel="stylesheet" href="style/style2.css">
     </head>
     <body>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="scripts/main.js"></script>
-        <!-- <script src="scripts/jquery.smooth-scroll.js"></script> -->
-         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+        <script src="scripts/main2.js"></script>
 
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGcj5aiX4UZjNdw-ane2U6hhle1hV0vCw&libraries=places"></script>
-
-  <!-- <script src="map-icons-master/dist/js/map-icons.js"></script> -->
         <div class="container">
-            <p class="title">SIP HAPPENS</p>
-            <p class="tagline">If you don't know a lot about wine but would like to enjoy wine,
-            be adventurous!</p>
-            <h1 class="text-center">What are you in the mood for today?</h1>
+            <p class="title">Sip Happens</p>
+            <p class="tagline">Ignite the adventurous wine drinker within.</p>
+            <h2 class="text-center">What are you in the mood for today?</h2>
 <div class="main">
     <form id="wine-choice">
         <select id="wineType" name="wineType">
+        <option value="sweet">Pick a flavour profile</option>
         <option value="sweet">Sweet and Fruity</option>
         <option value="crisp">Light and Crisp</option>
         <option value="bold wine">Bold</option>
@@ -42,17 +36,18 @@
 
     </form>
 
-
 </div>
+<p id="gotobottom">go to bottom</p>
+<div id="wine-selection" class="hide-wine-selection">
 <div class="wine-list">
 <h2 class="text-center">Select a wine</h2>
 <form id="wine-display">
 </form>
 </div>
-<div id="location" class="map">
+</div>
+<div id="location" class="map hide-map">
 
 </div>
-
 
 </div>
 
