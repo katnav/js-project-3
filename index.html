@@ -3,53 +3,52 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>Sip Happens</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="style/style2.css">
+        <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="scripts/main2.js"></script>
-
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGcj5aiX4UZjNdw-ane2U6hhle1hV0vCw&libraries=places"></script>
+        <script src="scripts/main.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGcj5aiX4UZjNdw-ane2U6hhle1hV0vCw&libraries=places"></script>
         <div class="container">
             <p class="title">Sip Happens</p>
-            <p class="tagline">Ignite the adventurous wine drinker within.</p>
+            <p class="tagline">ADVENTURES IN WINE</p>
             <h2 class="text-center">What are you in the mood for today?</h2>
-<div class="main">
-    <form id="wine-choice">
-        <select id="wineType" name="wineType">
-        <option value="sweet">Pick a flavour profile</option>
-        <option value="sweet">Sweet and Fruity</option>
-        <option value="crisp">Light and Crisp</option>
-        <option value="bold wine">Bold</option>
-        <option value="smooth wine">Smooth</option>
-        <option value="dry wine">Dry</option>
-        <option value="sparkling">Sparkling</option>
-        <option value="dessert wine">Dessert</option>
-        <option value="light wine">Light and Subtle</option>
-        <option value="rose wine">Rose</option>
+            <div class="main">
+                <form id="wine-choice">
+                    <select id="wineType" name="wineType">
+                        <option>Select a wine profile</option>
+                        <option value="sweet wine">Sweet and Fruity</option>
+                        <option value="crisp wine">Light and Crisp</option>
+                        <option value="bold wine">Bold</option>
+                        <option value="smooth wine">Smooth</option>
+                        <option value="dry wine">Dry</option>
+                        <option value="sparkling wine">Sparkling</option>
+                        <option value="dessert wine">Dessert</option>
+                        <option value="light wine">Light and Subtle</option>
+                        <option value="rose wine">Rose</option>
+                        <option value="white wine">White</option>
+                        <option value="red wine">Red</option>
+                    </select>
+                </form>
+            </div>
+            <div id="wine-selection" class="hide-wine-selection">
 
-      </select>
+                <div class="wine-list">
+                    <h2 class="text-center">Select a wine and locate the nearest LCBO</h2>
+                    <form id="wine-display">
+                    </form>
 
-    </form>
+                </div>
+            </div>
 
-</div>
-<p id="gotobottom">go to bottom</p>
-<div id="wine-selection" class="hide-wine-selection">
-<div class="wine-list">
-<h2 class="text-center">Select a wine</h2>
-<form id="wine-display">
-</form>
-</div>
-</div>
-<div id="location" class="map hide-map">
+            <div id="location" class="map hide-map">
+        </div>
+        <footer>
+    </footer>
 
-</div>
-
-</div>
 
     </body>
 </html>
