@@ -13,7 +13,8 @@ body {
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  margin-bottom: 100px; }
 
 .title {
   font-size: 100px;
