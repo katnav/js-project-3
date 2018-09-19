@@ -1,5 +1,23 @@
 const wineApp = {};
 wineApp.apikey = 'MDo1ZmIzNzRmMi1hYTE5LTExZTgtYTE2MC0wZjM0NTY4NzM0NTQ6MTFZV3NQZmhheWdxeGQ2WDVHazdoM1p0ZEFyUzlyV1RVcUg1';
+let lcboStoreMarkers = [];
+
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < lcboStoreMarkers.length; i++) {
+    lcboStoreMarkers[i].setMap(map);
+  }
+}
+
+ function clearLcboStoreMarkers() {
+  setMapOnAll(null);
+}
+
+function deleteLcboStoreMarkers() {
+  clearLcboStoreMarkers();
+  lcboStoreMarkers = [];
+}
 
 
 wineApp.getWines = (query) => {
@@ -83,6 +101,7 @@ wineApp.loadMap = function(lat, lng) {
             lng: lng
         },
         zoom: 8
+
     };
     wineApp.map = new google.maps.Map(mapDiv, mapOptions);
 
@@ -91,7 +110,8 @@ wineApp.loadMap = function(lat, lng) {
 } // end wineApp.loadMap
 
 
-wineApp.loadMarkers = function(lat, lng) {
+//user position marker
+wineApp.loadUserPositionMarker = function(lat, lng) {
 
 
     const currentPosition = new google.maps.Marker({
@@ -99,7 +119,8 @@ wineApp.loadMarkers = function(lat, lng) {
             lat: lat,
             lng: lng
         },
-        icon: 'https://maps.google.com/mapfiles/kml/shapes/schools_maps.png',
+        //icon: 'https://maps.google.com/mapfiles/kml/shapes/schools_maps.png',
+        icon: './images/userMarker.png',
         map: wineApp.map
     })
 
@@ -114,16 +135,16 @@ wineApp.loadMarkers = function(lat, lng) {
     });
 
 
-}; //end loadMarkers
+}; //end loadUserPositionMarker
 
-//user geolocation works
+//user geolocation
 wineApp.getUserLocation = function() {
 
     navigator.geolocation.getCurrentPosition(function(userPosition) {
 
         console.log(userPosition);
         wineApp.loadMap(userPosition.coords.latitude, userPosition.coords.longitude);
-        wineApp.loadMarkers(userPosition.coords.latitude, userPosition.coords.longitude)
+        wineApp.loadUserPositionMarker(userPosition.coords.latitude, userPosition.coords.longitude)
         wineApp.map.setCenter(userPosition);
         wineApp.usrLat = userPosition.coords.latitude;
         wineApp.usrLng = userPosition.coords.longitude;
@@ -135,12 +156,11 @@ wineApp.getUserLocation = function() {
 } //end user location
 
 
-//get stores by ID; works
+//get stores by ID;
 wineApp.getStoresById = function(clickedItem, lat, lng, storeName) {
 
     $.ajax({
         url: "http://lcboapi.com/stores",
-        // url: 'http://lcboapi.com/stores?latitude=lat&longitude=lng',
         headers: {
             'Authorization': 'Token wineApp.apikey'
         },
@@ -148,7 +168,7 @@ wineApp.getStoresById = function(clickedItem, lat, lng, storeName) {
         dataType: "jsonp",
         data: {
             product_id: clickedItem,
-            per_page: 10,
+            per_page: 20,
             page: 1,
             latitude: lat,
             longitude: lng,
@@ -166,6 +186,7 @@ wineApp.getStoresById = function(clickedItem, lat, lng, storeName) {
 
 wineApp.filteredStore = function(stores) {
 
+
     stores.forEach(function(store) {
         const storePos = {
             lat: store.latitude,
@@ -174,18 +195,18 @@ wineApp.filteredStore = function(stores) {
             id: store.id
         };
 
-        // const storeId = {
-
-        //     id: store.id
-
-        // };
-
+// store marker array
         const lcboStoreMarker = new google.maps.Marker({
 
             position: storePos,
             map: wineApp.map,
-            icon: '../api/images/LCBOMarker.png',
+            icon: './images/LCBOMarker.png',
+            // radius: 30000
+
         });
+
+
+        lcboStoreMarkers.push(lcboStoreMarker);
 
         console.log(storePos);
 
@@ -195,11 +216,17 @@ wineApp.filteredStore = function(stores) {
             wineApp.map.setZoom(10);
             wineApp.map.setCenter(lcboStoreMarker.getPosition());
 
-
+            if (store.address_line_2 === null) {
 
             infoWindowStore.setContent('<div><strong>' + store.name + '</strong><br>' +
           'Store ID: ' + store.id + '<br>' +
+          store.address_line_1 + '<br>'  + store.city + '<br>' + store.telephone + '<br>' +'</div>');
+        } else
+
+infoWindowStore.setContent('<div><strong>' + store.name + '</strong><br>' +
+          'Store ID: ' + store.id + '<br>' +
           store.address_line_1 + '<br>' + store.address_line_2 + '<br>' + store.city + '<br>' + store.telephone + '<br>' +'</div>');
+
             infoWindowStore.open(wineApp.map, this);
         }); //end listener
 
@@ -209,15 +236,9 @@ wineApp.filteredStore = function(stores) {
     }); //end forEach
 
 
-
-
-            // Removes the markers from the map, but keeps them in the array.
-      function clearMarkers() {
-        storePos = [];
-      }
-
-
 } //end filtered stores
+
+
 
 
 
@@ -225,13 +246,21 @@ wineApp.filteredStore = function(stores) {
 //display array of wines when user makes a selection
 wineApp.eventHandler = () => {
     $('#wineType').on('change', (event) => {
+
+        deleteLcboStoreMarkers();
+
         $('#wine-selection').removeClass('hide-wine-selection').addClass('show-wine-selection');
         wineApp.getWines(event.target.value);
+
+
 
     });
 
     //grabbing data (product id) and sending it to the stores endpont AJAX call
     $('#wine-display').on('click', 'input', function() {
+
+        //delete store markers each time a wine is clicked
+        deleteLcboStoreMarkers();
 
         const clickedItem = $(this).val();
         wineApp.getStoresById(clickedItem, wineApp.usrLat, wineApp.usrLng);
